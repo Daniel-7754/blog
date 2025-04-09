@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,7 +10,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//--------------------------------------------------
+//CATEGORIA
+//--------------------------------------------------
+Route::get('/categoria/', [CategoriaController::class, 'index'])->name('categoria.index');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/categoria/{id}',[CategoriaController::class, 'show'])->name('categoria.show');
