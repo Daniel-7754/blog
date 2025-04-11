@@ -23,7 +23,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categoria.categoria_create');
     }
 
     /**
@@ -31,7 +31,21 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $messages = [
+            'nome.required' => 'o nome é um campo obrigatório',
+        ];
+
+        $validator = $request->validate([
+            'nome' => 'required|min:5',
+        ], $messages);
+
+        //dd($request->all());
+        $categoria = new Categoria();
+        $categoria->nome = $request->nome;
+        $categoria->save();
+
+        return redirect()->route('categoria.index')->with('success', 'Categoria cadastrada com sucesso!');
     }
 
     /**
@@ -40,7 +54,7 @@ class CategoriaController extends Controller
     public function show(string $id)
     {
         $categoria = Categoria::find($id);
-        dd($categoria);
+        return view('categoria.categoria_show', compact('categoria'));
     }
 
     /**
