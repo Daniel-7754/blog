@@ -36,7 +36,7 @@ class CategoriaController extends Controller
             'nome.required' => 'o nome é um campo obrigatório',
         ];
 
-        $validator = $request->validate([
+         $validator = $request->validate([
             'nome' => 'required|min:5',
         ], $messages);
 
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
         $categoria->nome = $request->nome;
         $categoria->save();
 
-        return redirect()->route('categoria.index')->with('success', 'Categoria cadastrada com sucesso!');
+        return redirect()->route('categoria.index')->with('message', 'Categoria cadastrada com sucesso!');
     }
 
     /**
@@ -62,7 +62,8 @@ class CategoriaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+        return view('categoria.cayegoria_edit', compact('categoria'));
     }
 
     /**
