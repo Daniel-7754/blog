@@ -63,7 +63,7 @@ class CategoriaController extends Controller
     public function edit(string $id)
     {
         $categoria = Categoria::find($id);
-        return view('categoria.cayegoria_edit', compact('categoria'));
+        return view('categoria.categoria_edit', compact('categoria'));
     }
 
     /**
@@ -71,7 +71,23 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $messages = [
+            'nome.required' => 'o nome é um campo obrigatório',
+        ];
+
+         $validator = $request->validate([
+            'nome' => 'required|min:5',
+        ], $messages);
+
+        $categoria = Categoria::find($id);
+        $categoria->nome = $request->nome;
+        $categoria->save();
+
+        return redirect()->route('categoria.index')->with('message', 'Categoria atualizada com sucesso!');
+
+
+
     }
 
     /**
