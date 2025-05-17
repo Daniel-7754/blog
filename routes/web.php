@@ -24,3 +24,5 @@ Route::get('/categoria/{id}',[CategoriaController::class, 'show'])->name('catego
 Route::get('/categoria/{id}/edit' , [categoriaController::class, 'edit'])->name('categoria.edit');
 
 Route::put('/categoria/{id}', [CategoriaController::class, 'update'])->name('categoria.update');
+
+Route::delete('/categoria/{id}', [CategoriaController::class, 'destroy'])->name('categoria.destroy');
